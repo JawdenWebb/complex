@@ -21,3 +21,15 @@ after_success:
   - docker push jawdenwebb/multi-nginx 
   - docker push jawdenwebb/multi-server
   - docker push jawdenwebb/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'af-south-1'
+  app: 'multi-docker'
+  env: 'MultiDocker-env'
+  bucket_name: 'elasticbeanstalk-af-south-1-908825152166'
+  bucket_path: 'docker-multi'
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

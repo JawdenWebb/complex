@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions":[
+        {
+            "name": "client",
+            "image": "jawdenwebb/multi-client", 
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "jawdenwebb/multi-server", 
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "jawdenwebb/multi-worker", 
+            "hostname": "worker",
+            "essential": false
+        }, 
+        {
+            "name": "nginx",
+            "image": "jawdenwebb/multi-nginx",
+            "hostname": "worker", 
+            "essential": true, 
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links":["client", "server"]
+        }
+    ]
+}
